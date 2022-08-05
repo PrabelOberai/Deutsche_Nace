@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.deutsche.nace.entity.Nace;
+import com.deutsche.nace.exception.NaceBadRequestException;
 import com.deutsche.nace.model.request.PutRequest;
 import com.deutsche.nace.repository.NaceRepository;
 
@@ -14,10 +15,13 @@ public class UpdateRecordServiceImpl implements UpdateRecordService {
 	NaceRepository naceRepository;
 
 	@Override
-	public Nace updateRecord(PutRequest request) {
+	public Nace putNaceDetails(PutRequest request) {
 		// TODO Auto-generated method stub
-		return naceRepository.findById(request.getOrderId()).map(itemRecord -> {
-			itemRecord.setOrderId(request.getOrderId());
+		if (isNullOrBlank(request.getOrder())) {
+			throw new NaceBadRequestException();
+		}
+		return naceRepository.findById(request.getOrder()).map(itemRecord -> {
+			itemRecord.setOrderId(request.getOrder());
 			itemRecord.setLevel(request.getLevel());
 			itemRecord.setCode(request.getCode());
 			itemRecord.setParent(request.getParent());
@@ -35,7 +39,7 @@ public class UpdateRecordServiceImpl implements UpdateRecordService {
 	
 	private Nace mapNewRecord(PutRequest request) {
 		Nace newItemRecord = new Nace();
-		newItemRecord.setOrderId(request.getOrderId());
+		newItemRecord.setOrderId(request.getOrder());
 		newItemRecord.setLevel(request.getLevel());
 		newItemRecord.setCode(request.getCode());
 		newItemRecord.setParent(request.getParent());
@@ -46,6 +50,10 @@ public class UpdateRecordServiceImpl implements UpdateRecordService {
 		newItemRecord.setThisItemExcludes(request.getThisItemExcludes());
 		newItemRecord.setReferenceToIsicRev4(request.getReferenceToIsicRev4());
 		return newItemRecord;
+	}
+	
+	private boolean isNullOrBlank(String param) {
+		return param == null || param.trim().length() == 0;
 	}
 	
 	@Autowired

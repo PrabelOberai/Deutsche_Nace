@@ -16,7 +16,7 @@ public class PutRequest {
 
 	@Valid
 	@NotNull(message = "'orderId' is required in the request body")
-	private String orderId;
+	private String order;
 
 	private String level;
 

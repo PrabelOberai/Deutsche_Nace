@@ -15,7 +15,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.deutsche.nace.exception.NaceException;
+import com.deutsche.nace.exception.NaceBadRequestException;
+import com.deutsche.nace.exception.NaceDetailsNotFoundException;
 import com.deutsche.nace.model.request.PutRequest;
 import com.deutsche.nace.model.response.GetResponse;
 import com.deutsche.nace.service.GetRecordService;
@@ -34,16 +35,16 @@ public class NaceController {
 	GetRecordService getRecordService;
 
 	@PutMapping("/service")
-	public ResponseEntity updateOrCreateRecord(@Valid @RequestBody PutRequest request) throws NaceException {
+	public ResponseEntity putNaceDetails(@Valid @RequestBody PutRequest request) throws NaceBadRequestException {
 		logger.info("Received record to insert: " + request.toString());
-		updateRecordService.updateRecord(request);
+		updateRecordService.putNaceDetails(request);
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
 	
 	@GetMapping("/service/{orderId}")
-	public ResponseEntity<GetResponse> getRecord(@PathVariable String orderId) throws NaceException {
+	public ResponseEntity<GetResponse> getNaceDetails(@PathVariable String orderId) throws NaceDetailsNotFoundException {
 		logger.info("Fetching record for Order Id: " + orderId);
-		GetResponse getResponse =  getRecordService.getRecord(orderId);
+		GetResponse getResponse =  getRecordService.getNaceDetails(orderId);
 		return new ResponseEntity<>(getResponse, HttpStatus.OK);
 	}
 

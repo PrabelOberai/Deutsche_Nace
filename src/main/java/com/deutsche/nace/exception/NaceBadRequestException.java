@@ -1,10 +1,10 @@
 package com.deutsche.nace.exception;
 
-public class NaceException extends RuntimeException {
+public class NaceBadRequestException extends RuntimeException {
 
 	private static final long serialVersionUID = 1L;
 
-	public NaceException() {
+	public NaceBadRequestException() {
 		super();
 	}
 	

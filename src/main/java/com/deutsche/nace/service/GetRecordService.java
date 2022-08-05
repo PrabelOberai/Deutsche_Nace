@@ -4,6 +4,6 @@ import com.deutsche.nace.model.response.GetResponse;
 
 public interface GetRecordService {
 
-	GetResponse getRecord(String orderId);
+	GetResponse getNaceDetails(String orderId);
 	
 }

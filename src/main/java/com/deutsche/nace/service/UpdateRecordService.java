@@ -5,6 +5,6 @@ import com.deutsche.nace.model.request.PutRequest;
 
 public interface UpdateRecordService {
 
-	Nace updateRecord(PutRequest request);
+	Nace putNaceDetails(PutRequest request);
 	
 }

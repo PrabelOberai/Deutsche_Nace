@@ -45,7 +45,10 @@
 			<artifactId>springdoc-openapi-ui</artifactId>
 			<version>1.6.9</version>
 		</dependency>
-
+		<dependency>
+			<groupId>org.liquibase</groupId>
+			<artifactId>liquibase-core</artifactId>
+		</dependency>
 		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
@@ -111,15 +114,9 @@
 					</excludes>
 				</configuration>
 			</plugin>
-			<!-- <plugin>
-				<artifactId>maven-surefire-plugin</artifactId>
-				<version>2.21.0</version>
-				<configuration>
-					<includes>
-						<include>NaceControllerTest.java</include>
-					</includes>
-				</configuration>
-			</plugin> -->
+			<!-- <plugin> <artifactId>maven-surefire-plugin</artifactId> <version>2.21.0</version> 
+				<configuration> <includes> <include>NaceControllerTest.java</include> </includes> 
+				</configuration> </plugin> -->
 		</plugins>
 	</build>
 
